@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Data - Pangkas Rambut Arjuna</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #dc3545 0%, #0d6efd 100%);
+            color: white;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .navbar-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            padding: 3px;
+        }
+
+        .navbar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .navbar h1 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .navbar .user-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .user-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .btn-logout {
+            background: rgba(255, 255, 255, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-logout:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 0 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .tab {
+            padding: 14px 28px;
+            background: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #dc3545 0%, #0d6efd 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(220, 53, 69, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            color: #212529;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h2::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(135deg, #dc3545 0%, #0d6efd 100%);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #495057;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #dc3545;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.08);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #dc3545 0%, #0d6efd 100%);
+            color: white;
+            box-shadow: 0 5px 20px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(220, 53, 69, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 15px;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .alert-error {
+            background: linear-gradient(135deg, #fee 0%, #fcc 100%);
+            color: #c33;
+            border: 2px solid #dc3545;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #495057;
+            margin: 25px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            .form-row,
+            .form-row-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar h1 {
+                font-size: 16px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <div class="navbar-logo">
+                <img src="logo.jpg" alt="Logo">
+            </div>
+            <h1>✂️ Pangkas Rambut Arjuna</h1>
+        </div>
+        <div class="user-info">
+            <span class="user-badge" id="username-display">👤</span>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('income')">💰 Pemasukan</button>
+            <button class="tab" onclick="switchTab('expense-daily')">💸 Pengeluaran Harian</button>
+            <button class="tab" onclick="switchTab('expense-monthly')">📅 Pengeluaran Bulanan</button>
+        </div>
+
+        <!-- Income Tab -->
+        <div id="income-tab" class="tab-content active">
+            <div class="card">
+                <h2>Input Pemasukan Harian</h2>
+                <div id="income-alert" class="alert"></div>
+                <form id="incomeForm">
+                    <div class="form-row-3">
+                        <div class="form-group">
+                            <label for="income-date">📅 Tanggal</label>
+                            <input type="date" id="income-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="income-day">🗓️ Hari</label>
+                            <input type="text" id="income-day" readonly>
+                        </div>
+                    </div>
+
+                    <div class="section-title">👥 Customer</div>
+                    <div class="form-row-3">
+                        <div class="form-group">
+                            <label for="income-dewasa">Dewasa</label>
+                            <input type="number" id="income-dewasa" min="0" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="income-anak">Anak</label>
+                            <input type="number" id="income-anak" min="0" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="income-jumlah">Jumlah Total</label>
+                            <input type="number" id="income-jumlah" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="income-total">💰 Total Pemasukan (Rp)</label>
+                        <input type="number" id="income-total" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="income-notes">📝 Keterangan (Opsional)</label>
+                        <textarea id="income-notes" rows="3" placeholder="Contoh: Cash, TF Dana, dll"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">💾 Simpan Pemasukan</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Daily Expense Tab -->
+        <div id="expense-daily-tab" class="tab-content">
+            <div class="card">
+                <h2>Input Pengeluaran Harian</h2>
+                <div id="expense-daily-alert" class="alert"></div>
+                <form id="expenseDailyForm">
+                    <div class="form-group">
+                        <label for="expense-daily-date">📅 Tanggal</label>
+                        <input type="date" id="expense-daily-date" required>
+                    </div>
+
+                    <div class="section-title">💸 Pengeluaran Harian</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expense-akomodasi">Akomodasi (Rp)</label>
+                            <input type="number" id="expense-akomodasi" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="expense-listrik">Listrik & PDAM (Rp)</label>
+                            <input type="number" id="expense-listrik" min="0" value="0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expense-investor">Investor (Rp)</label>
+                            <input type="number" id="expense-investor" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="expense-kontrakan">Kontrakan (Rp)</label>
+                            <input type="number" id="expense-kontrakan" min="0" value="0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expense-gaji">Gaji (Rp)</label>
+                            <input type="number" id="expense-gaji" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="expense-kopi">Kopi & Rokok (Rp)</label>
+                            <input type="number" id="expense-kopi" min="0" value="0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expense-jumlah">Jumlah Pengeluaran (Rp)</label>
+                            <input type="number" id="expense-jumlah" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="expense-titipan">Titipan (Rp)</label>
+                            <input type="number" id="expense-titipan" min="0" value="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expense-daily-notes">📝 Keterangan (Opsional)</label>
+                        <textarea id="expense-daily-notes" rows="3" placeholder="Catatan tambahan"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">💾 Simpan Pengeluaran</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Monthly Expense Tab -->
+        <div id="expense-monthly-tab" class="tab-content">
+            <div class="card">
+                <h2>Input Pengeluaran Rutin Bulanan</h2>
+                <div id="expense-monthly-alert" class="alert"></div>
+                <form id="expenseMonthlyForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expense-month">📅 Bulan</label>
+                            <select id="expense-month" required>
+                                <option value="01">Januari</option>
+                                <option value="02">Februari</option>
+                                <option value="03">Maret</option>
+                                <option value="04">April</option>
+                                <option value="05">Mei</option>
+                                <option value="06">Juni</option>
+                                <option value="07">Juli</option>
+                                <option value="08">Agustus</option>
+                                <option value="09">September</option>
+                                <option value="10">Oktober</option>
+                                <option value="11">November</option>
+                                <option value="12">Desember</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="expense-year">📆 Tahun</label>
+                            <input type="number" id="expense-year" min="2020" max="2030" required>
+                        </div>
+                    </div>
+
+                    <div class="section-title">📋 Pengeluaran Rutin Bulanan</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="monthly-akomodasi">Akomodasi Barber (Rp)</label>
+                            <input type="number" id="monthly-akomodasi" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="monthly-listrik">Listrik & PDAM (Rp)</label>
+                            <input type="number" id="monthly-listrik" min="0" value="0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="monthly-investor">Investor (Rp)</label>
+                            <input type="number" id="monthly-investor" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="monthly-kontrakan">Kontrakan (Rp)</label>
+                            <input type="number" id="monthly-kontrakan" min="0" value="0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="monthly-gaji">Gaji (Rp)</label>
+                            <input type="number" id="monthly-gaji" min="0" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="monthly-ridwan">Ridwan (Rp)</label>
+                            <input type="number" id="monthly-ridwan" min="0" value="0">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">💾 Simpan Pengeluaran Bulanan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check authentication
+        function checkAuth() {
+            const session = sessionStorage.getItem('arjuna_session');
+            if (!session) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            const user = JSON.parse(session);
+            document.getElementById('username-display').textContent = '👤 ' + user.name;
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Yakin ingin logout?')) {
+                sessionStorage.removeItem('arjuna_session');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Switch tabs
+        function switchTab(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        // Get day name in Indonesian
+        function getDayName(dateStr) {
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const date = new Date(dateStr);
+            return days[date.getDay()];
+        }
+
+        // Update day when date changes
+        document.getElementById('income-date').addEventListener('change', function() {
+            document.getElementById('income-day').value = getDayName(this.value);
+        });
+
+        // Auto calculate total customer
+        function updateTotalCustomer() {
+            const dewasa = parseInt(document.getElementById('income-dewasa').value) || 0;
+            const anak = parseInt(document.getElementById('income-anak').value) || 0;
+            document.getElementById('income-jumlah').value = dewasa + anak;
+        }
+
+        document.getElementById('income-dewasa').addEventListener('input', updateTotalCustomer);
+        document.getElementById('income-anak').addEventListener('input', updateTotalCustomer);
+
+        // Set default dates
+        function setDefaultDates() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('income-date').value = today;
+            document.getElementById('income-day').value = getDayName(today);
+            document.getElementById('expense-daily-date').value = today;
+            
+            const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
+            const currentYear = new Date().getFullYear();
+            document.getElementById('expense-month').value = currentMonth;
+            document.getElementById('expense-year').value = currentYear;
+        }
+
+        // Income form
+        document.getElementById('incomeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                id: Date.now(),
+                date: document.getElementById('income-date').value,
+                day: document.getElementById('income-day').value,
+                dewasa: parseInt(document.getElementById('income-dewasa').value),
+                anak: parseInt(document.getElementById('income-anak').value),
+                jumlah: parseInt(document.getElementById('income-jumlah').value),
+                total_income: parseInt(document.getElementById('income-total').value),
+                keterangan: document.getElementById('income-notes').value,
+                created_at: new Date().toISOString()
+            };
+            
+            // Get existing data
+            let incomeData = JSON.parse(localStorage.getItem('arjuna_income') || '[]');
+            incomeData.push(data);
+            localStorage.setItem('arjuna_income', JSON.stringify(incomeData));
+            
+            // Show success message
+            const alertBox = document.getElementById('income-alert');
+            alertBox.className = 'alert alert-success';
+            alertBox.textContent = '✅ Data pemasukan berhasil disimpan!';
+            alertBox.style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            setDefaultDates();
+            updateTotalCustomer();
+            
+            setTimeout(() => alertBox.style.display = 'none', 3000);
+        });
+
+        // Daily expense form
+        document.getElementById('expenseDailyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = {
+                id: Date.now(),
+                date: document.getElementById('expense-daily-date').value,
+                akomodasi: parseInt(document.getElementById('expense-akomodasi').value),
+                listrik_pdam: parseInt(document.getElementById('expense-listrik').value),
+                investor: parseInt(document.getElementById('expense-investor').value),
+                kontrakan: parseInt(document.getElementById('expense-kontrakan').value),
+                gaji: parseInt(document.getElementById('expense-gaji').value),
+                kopi_rokok: parseInt(document.getElementById('expense-kopi').value),
+                jumlah_pengeluaran: parseInt(document.getElementById('expense-jumlah').value),
+                titipan: parseInt(document.getElementById('expense-titipan').value),
+                keterangan: document.getElementById('expense-daily-notes').value,
+                created_at: new Date().toISOString()
+            };
+            
+            // Get existing data
+            let expenseData = JSON.parse(localStorage.getItem('arjuna_expense_daily') || '[]');
+            expenseData.push(data);
+            localStorage.setItem('arjuna_expense_daily', JSON.stringify(expenseData));
+            
+            // Show success message
+            const alertBox = document.getElementById('expense-daily-alert');
+            alertBox.className = 'alert alert-success';
+            alertBox.textContent = '✅ Data pengeluaran harian berhasil disimpan!';
+            alertBox.style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            setDefaultDates();
+            
+            setTimeout(() => alertBox.style.display = 'none', 3000);
+        });
+
+        // Monthly expense form
+        document.getElementById('expenseMonthlyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const month = document.getElementById('expense-month').value;
+            const year = parseInt(document.getElementById('expense-year').value);
+            const key = `${year}-${month}`;
+            
+            const data = {
+                month: month,
+                year: year,
+                akomodasi_barber: parseInt(document.getElementById('monthly-akomodasi').value),
+                listrik_pdam: parseInt(document.getElementById('monthly-listrik').value),
+                investor: parseInt(document.getElementById('monthly-investor').value),
+                kontrakan: parseInt(document.getElementById('monthly-kontrakan').value),
+                gaji: parseInt(document.getElementById('monthly-gaji').value),
+                ridwan: parseInt(document.getElementById('monthly-ridwan').value),
+                updated_at: new Date().toISOString()
+            };
+            
+            // Get existing data
+            let monthlyData = JSON.parse(localStorage.getItem('arjuna_expense_monthly') || '{}');
+            monthlyData[key] = data;
+            localStorage.setItem('arjuna_expense_monthly', JSON.stringify(monthlyData));
+            
+            // Show success message
+            const alertBox = document.getElementById('expense-monthly-alert');
+            alertBox.className = 'alert alert-success';
+            alertBox.textContent = '✅ Data pengeluaran bulanan berhasil disimpan!';
+            alertBox.style.display = 'block';
+            
+            setTimeout(() => alertBox.style.display = 'none', 3000);
+        });
+
+        // Initialize
+        checkAuth();
+        setDefaultDates();
+        updateTotalCustomer();
+    </script>
+</body>
+</html>

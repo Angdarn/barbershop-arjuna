@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Cepat - Pangkas Rambut Arjuna</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #dc3545 0%, #0d6efd 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 20px;
+            opacity: 0.95;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .quick-start {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
+        }
+
+        .quick-start h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quick-start ol {
+            margin-left: 25px;
+            font-size: 18px;
+            line-height: 2;
+        }
+
+        .quick-start ol li {
+            margin: 10px 0;
+        }
+
+        .quick-start strong {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 10px;
+            border-radius: 5px;
+        }
+
+        .step {
+            background: #f8f9fa;
+            border-left: 6px solid #dc3545;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #dc3545 0%, #0d6efd 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            margin-right: 20px;
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .step h2 {
+            display: inline;
+            color: #212529;
+            font-size: 26px;
+        }
+
+        .step p {
+            margin-top: 20px;
+            color: #495057;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        .credential-box {
+            background: linear-gradient(135deg, #0d6efd 0%, #6f42c1 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 18px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(13, 110, 253, 0.3);
+        }
+
+        .credential-box h3 {
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .credential-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .credential-item strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .credential-item code {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 35px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card .emoji {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h4 {
+            color: #212529;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .feature-card p {
+            color: #6c757d;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .btn-start {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc3545 0%, #0d6efd 100%);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 30px 0;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(220, 53, 69, 0.4);
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+            padding: 25px 30px;
+            border-radius: 15px;
+            border-left: 6px solid #ffc107;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.2);
+        }
+
+        .highlight h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .highlight ul {
+            margin-left: 25px;
+            color: #856404;
+            line-height: 2;
+        }
+
+        .highlight ul li {
+            margin: 8px 0;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #212529 0%, #343a40 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 8px 0;
+            opacity: 0.9;
+        }
+
+        .footer a {
+            color: #20c997;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 28px;
+            }
+            
+            .content {
+                padding: 30px 25px;
+            }
+
+            .step {
+                padding: 20px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="logo.jpg" alt="Pangkas Rambut Arjuna">
+            </div>
+            <h1>✂️ Panduan Cepat</h1>
+            <p>Sistem Pencatatan Keuangan</p>
+        </div>
+
+        <div class="content">
+            <div class="quick-start">
+                <h2>🚀 START DALAM 3 LANGKAH!</h2>
+                <ol>
+                    <li>Extract file <strong>ZIP</strong></li>
+                    <li>Double-click <strong>index.html</strong></li>
+                    <li><strong>Login</strong> dan mulai pakai!</li>
+                </ol>
+                <p style="margin-top: 20px; font-size: 16px; opacity: 0.95;">
+                    <strong>TIDAK PERLU</strong> install Node.js, setup server, atau koneksi internet!
+                </p>
+            </div>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <h2>Buka Sistem</h2>
+                <p>Cari file <strong>index.html</strong> di folder yang sudah di-extract, lalu double-click untuk membuka. Sistem akan langsung terbuka di browser default Anda.</p>
+            </div>
+
+            <div class="credential-box">
+                <h3>🔐 Akun Login Default</h3>
+                <div class="credential-item">
+                    <strong>👤 Owner (Pemilik)</strong>
+                    Username: <code>owner</code> | Password: <code>owner123</code>
+                    <br><small>Akses: Dashboard + Input Data</small>
+                </div>
+                <div class="credential-item">
+                    <strong>👷 Pekerja</strong>
+                    Username: <code>pekerja</code> | Password: <code>pekerja123</code>
+                    <br><small>Akses: Input Data</small>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <h2>Input Data Harian</h2>
+                <p>Setelah login, pilih tab untuk input <strong>Pemasukan</strong>, <strong>Pengeluaran Harian</strong>, atau <strong>Pengeluaran Bulanan</strong>. Isi form dan klik Simpan. Data otomatis tersimpan!</p>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <h2>Lihat Dashboard & Export</h2>
+                <p>Owner bisa melihat <strong>Dashboard</strong> lengkap dengan statistik real-time, rekap detail, dan <strong>Export ke Excel</strong> kapan saja dengan format profesional!</p>
+            </div>
+
+            <h2 style="margin: 50px 0 25px 0; text-align: center; color: #212529; font-size: 32px;">
+                ✨ Fitur Lengkap
+            </h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="emoji">💰</div>
+                    <h4>Input Pemasukan</h4>
+                    <p>Customer Dewasa/Anak, total otomatis, hari otomatis</p>
+                </div>
+                <div class="feature-card">
+                    <div class="emoji">💸</div>
+                    <h4>Input Pengeluaran</h4>
+                    <p>Semua kategori lengkap sesuai kebutuhan barbershop</p>
+                </div>
+                <div class="feature-card">
+                    <div class="emoji">📊</div>
+                    <h4>Dashboard</h4>
+                    <p>Statistik real-time, rekap lengkap, visual menarik</p>
+                </div>
+                <div class="feature-card">
+                    <div class="emoji">📥</div>
+                    <h4>Export Excel</h4>
+                    <p>Download laporan format profesional siap print</p>
+                </div>
+                <div class="feature-card">
+                    <div class="emoji">📱</div>
+                    <h4>Mobile Friendly</h4>
+                    <p>Responsive, nyaman diakses dari HP</p>
+                </div>
+                <div class="feature-card">
+                    <div class="emoji">🔒</div>
+                    <h4>Data Aman</h4>
+                    <p>Tersimpan lokal, 100% offline, no server</p>
+                </div>
+            </div>
+
+            <div class="highlight">
+                <h3>⚡ Tips Penting!</h3>
+                <ul>
+                    <li><strong>Data di browser</strong> - Jangan clear cache/data browser!</li>
+                    <li><strong>Backup rutin</strong> - Export Excel setiap minggu</li>
+                    <li><strong>Akses dari HP</strong> - Copy folder ke HP, buka index.html</li>
+                    <li><strong>100% offline</strong> - Tidak butuh internet (kecuali export)</li>
+                    <li><strong>Logo branding</strong> - Pangkas Rambut Arjuna di semua halaman</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; margin: 50px 0;">
+                <a href="index.html" class="btn-start">✂️ Mulai Sekarang!</a>
+                <p style="margin-top: 20px; color: #6c757d;">
+                    Baca <a href="README.md" style="color: #dc3545; font-weight: 600;">README.md</a> untuk panduan lengkap
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p style="font-size: 24px; font-weight: 700; margin-bottom: 15px;">
+                ✂️ Pangkas Rambut Arjuna
+            </p>
+            <p style="font-size: 16px;">Sistem Pencatatan Keuangan</p>
+            <p style="font-size: 14px; margin-top: 15px;">Est. 2020</p>
+            <p style="margin-top: 25px; font-size: 13px; opacity: 0.7;">
+                Versi Standalone - Langsung Pakai Tanpa Instalasi
+            </p>
+        </div>
+    </div>
+</body>
+</html>
