@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Data - Pangkas Rambut Arjuna</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .navbar-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: white;
+            padding: 3px;
+            overflow: hidden;
+        }
+
+        .navbar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .navbar h1 {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .navbar .user-info {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .user-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-logout, .btn-settings {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 24px auto;
+            padding: 0 16px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .page-subtitle {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 28px;
+            font-weight: 500;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            margin-bottom: 24px;
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            color: #1f2937;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.2s;
+            background: #f9fafb;
+            font-weight: 500;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .alert {
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            display: none;
+            animation: slideDown 0.3s ease;
+            font-weight: 600;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #10b981;
+        }
+
+        .data-list {
+            margin-top: 32px;
+        }
+
+        .data-item {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 14px;
+            transition: all 0.2s;
+        }
+
+        .data-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+        }
+
+        .data-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .data-item-date {
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 15px;
+        }
+
+        .data-item-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-edit, .btn-delete {
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-edit {
+            background: #dbeafe;
+            color: #1e40af;
+            border: none;
+        }
+
+        .btn-delete {
+            background: #fee2e2;
+            color: #991b1b;
+            border: none;
+        }
+
+        .data-item-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            font-size: 14px;
+            color: #4b5563;
+        }
+
+        .data-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .data-label {
+            font-size: 12px;
+            color: #9ca3af;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-value {
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 15px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 48px;
+            color: #9ca3af;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            padding: 24px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .modal-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-footer {
+            padding: 20px 24px;
+            border-top: 2px solid #e5e7eb;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .btn-cancel {
+            padding: 12px 24px;
+            background: #f3f4f6;
+            color: #374151;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .navbar h1 {
+                font-size: 14px;
+            }
+
+            .navbar-logo {
+                width: 36px;
+                height: 36px;
+            }
+
+            .user-badge {
+                display: none;
+            }
+
+            .btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+
+            .form-row,
+            .form-row-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .page-title {
+                font-size: 22px;
+            }
+
+            .data-item-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <div class="navbar-logo">
+                <img src="logo.jpg" alt="Logo" onerror="this.style.display='none'">
+            </div>
+            <h1>✂️ Pangkas Rambut Arjuna</h1>
+        </div>
+        <div class="user-info">
+            <span class="user-badge" id="username-display"></span>
+            <button class="btn btn-settings" onclick="window.location.href='settings.html'">⚙️</button>
+            <button class="btn btn-logout" onclick="logout()">Keluar</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="page-title">Input Data Harian</h1>
+        <p class="page-subtitle">Input pemasukan dan akomodasi harian</p>
+
+        <!-- Input Form -->
+        <div class="card">
+            <h2>📝 Form Input</h2>
+            <div id="income-alert" class="alert"></div>
+            <form id="incomeForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="income-date">📅 Tanggal</label>
+                        <input type="date" id="income-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="income-day">🗓️ Hari</label>
+                        <input type="text" id="income-day" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row-3">
+                    <div class="form-group">
+                        <label for="income-dewasa">👨 Dewasa</label>
+                        <input type="number" id="income-dewasa" min="0" value="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="income-anak">👶 Anak</label>
+                        <input type="number" id="income-anak" min="0" value="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="income-jumlah">👥 Total</label>
+                        <input type="number" id="income-jumlah" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="income-total">💰 Total Pemasukan (Rp)</label>
+                    <input type="number" id="income-total" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="expense-akomodasi">🏠 Akomodasi (Rp)</label>
+                    <input type="number" id="expense-akomodasi" min="0" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="income-notes">📝 Keterangan (Opsional)</label>
+                    <textarea id="income-notes" rows="3" placeholder="Contoh: Cash, TF Dana, dll"></textarea>
+                </div>
+
+                <input type="hidden" id="edit-id" value="">
+                <button type="submit" class="btn-primary" id="submit-btn">💾 Simpan Data</button>
+            </form>
+        </div>
+
+        <!-- Data List -->
+        <div class="card">
+            <h2>📋 Data Hari Ini</h2>
+            <div id="data-list" class="data-list"></div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>✏️ Edit Data</h3>
+            </div>
+            <div class="modal-body">
+                <p>Form edit akan muncul di form utama. Klik tombol edit pada data yang ingin diubah.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check auth
+        function checkAuth() {
+            const session = sessionStorage.getItem('arjuna_session');
+            if (!session) {
+                window.location.href = 'index.html';
+                return null;
+            }
+            
+            const user = JSON.parse(session);
+            document.getElementById('username-display').textContent = user.name;
+            return user;
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Yakin ingin keluar?')) {
+                sessionStorage.removeItem('arjuna_session');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Get day name
+        function getDayName(dateStr) {
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const date = new Date(dateStr);
+            return days[date.getDay()];
+        }
+
+        // Update day when date changes
+        document.getElementById('income-date').addEventListener('change', function() {
+            document.getElementById('income-day').value = getDayName(this.value);
+        });
+
+        // Auto calculate total customer
+        function updateTotalCustomer() {
+            const dewasa = parseInt(document.getElementById('income-dewasa').value) || 0;
+            const anak = parseInt(document.getElementById('income-anak').value) || 0;
+            document.getElementById('income-jumlah').value = dewasa + anak;
+        }
+
+        document.getElementById('income-dewasa').addEventListener('input', updateTotalCustomer);
+        document.getElementById('income-anak').addEventListener('input', updateTotalCustomer);
+
+        // Set default date
+        function setDefaultDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('income-date').value = today;
+            document.getElementById('income-day').value = getDayName(today);
+        }
+
+        // Format currency
+        function formatRupiah(amount) {
+            return new Intl.NumberFormat('id-ID').format(amount);
+        }
+
+        // Income form submit
+        document.getElementById('incomeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const editId = document.getElementById('edit-id').value;
+            const data = {
+                id: editId || Date.now(),
+                date: document.getElementById('income-date').value,
+                day: document.getElementById('income-day').value,
+                dewasa: parseInt(document.getElementById('income-dewasa').value),
+                anak: parseInt(document.getElementById('income-anak').value),
+                jumlah: parseInt(document.getElementById('income-jumlah').value),
+                total_income: parseInt(document.getElementById('income-total').value),
+                akomodasi: parseInt(document.getElementById('expense-akomodasi').value) || 0,
+                keterangan: document.getElementById('income-notes').value,
+                created_at: new Date().toISOString()
+            };
+            
+            let incomeData = JSON.parse(localStorage.getItem('arjuna_income') || '[]');
+            
+            if (editId) {
+                // Update existing
+                const index = incomeData.findIndex(item => item.id == editId);
+                if (index !== -1) {
+                    incomeData[index] = data;
+                }
+            } else {
+                // Add new
+                incomeData.push(data);
+            }
+            
+            localStorage.setItem('arjuna_income', JSON.stringify(incomeData));
+            
+            // Show success
+            const alertBox = document.getElementById('income-alert');
+            alertBox.className = 'alert alert-success';
+            alertBox.textContent = editId ? '✅ Data berhasil diupdate!' : '✅ Data berhasil disimpan!';
+            alertBox.style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            document.getElementById('edit-id').value = '';
+            document.getElementById('submit-btn').textContent = '💾 Simpan Data';
+            setDefaultDate();
+            updateTotalCustomer();
+            loadDataList();
+            
+            setTimeout(() => alertBox.style.display = 'none', 3000);
+        });
+
+        // Load data list
+        function loadDataList() {
+            const today = new Date().toISOString().split('T')[0];
+            const incomeData = JSON.parse(localStorage.getItem('arjuna_income') || '[]');
+            const todayData = incomeData.filter(item => item.date === today).sort((a, b) => b.id - a.id);
+            
+            const dataList = document.getElementById('data-list');
+            
+            if (todayData.length === 0) {
+                dataList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <p>Belum ada data hari ini</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            dataList.innerHTML = todayData.map(item => `
+                <div class="data-item">
+                    <div class="data-item-header">
+                        <div class="data-item-date">${item.day} - ${new Date(item.date).toLocaleDateString('id-ID')}</div>
+                        <div class="data-item-actions">
+                            <button class="btn-edit" onclick="editData(${item.id})">✏️ Edit</button>
+                            <button class="btn-delete" onclick="deleteData(${item.id})">🗑️ Hapus</button>
+                        </div>
+                    </div>
+                    <div class="data-item-content">
+                        <div class="data-field">
+                            <span class="data-label">Customer</span>
+                            <span class="data-value">${item.jumlah} orang</span>
+                        </div>
+                        <div class="data-field">
+                            <span class="data-label">Pemasukan</span>
+                            <span class="data-value">Rp ${formatRupiah(item.total_income)}</span>
+                        </div>
+                        <div class="data-field">
+                            <span class="data-label">Akomodasi</span>
+                            <span class="data-value">Rp ${formatRupiah(item.akomodasi)}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Edit data
+        function editData(id) {
+            const incomeData = JSON.parse(localStorage.getItem('arjuna_income') || '[]');
+            const data = incomeData.find(item => item.id === id);
+            
+            if (data) {
+                document.getElementById('income-date').value = data.date;
+                document.getElementById('income-day').value = data.day;
+                document.getElementById('income-dewasa').value = data.dewasa;
+                document.getElementById('income-anak').value = data.anak;
+                document.getElementById('income-jumlah').value = data.jumlah;
+                document.getElementById('income-total').value = data.total_income;
+                document.getElementById('expense-akomodasi').value = data.akomodasi;
+                document.getElementById('income-notes').value = data.keterangan;
+                document.getElementById('edit-id').value = data.id;
+                document.getElementById('submit-btn').textContent = '💾 Update Data';
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Delete data
+        function deleteData(id) {
+            if (confirm('Yakin ingin menghapus data ini?')) {
+                let incomeData = JSON.parse(localStorage.getItem('arjuna_income') || '[]');
+                incomeData = incomeData.filter(item => item.id !== id);
+                localStorage.setItem('arjuna_income', JSON.stringify(incomeData));
+                loadDataList();
+                
+                const alertBox = document.getElementById('income-alert');
+                alertBox.className = 'alert alert-success';
+                alertBox.textContent = '✅ Data berhasil dihapus!';
+                alertBox.style.display = 'block';
+                setTimeout(() => alertBox.style.display = 'none', 3000);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').classList.remove('active');
+        }
+
+        // Initialize
+        const user = checkAuth();
+        if (user) {
+            
+            // Check if editing from dashboard
+            const editId = sessionStorage.getItem('edit_id');
+            if (editId) {
+                const incomeData = JSON.parse(localStorage.getItem('arjuna_income') || '[]');
+                const data = incomeData.find(item => item.id == editId);
+                if (data) {
+                    document.getElementById('income-date').value = data.date;
+                    document.getElementById('income-day').value = data.day;
+                    document.getElementById('income-dewasa').value = data.dewasa;
+                    document.getElementById('income-anak').value = data.anak;
+                    document.getElementById('income-jumlah').value = data.jumlah;
+                    document.getElementById('income-total').value = data.total_income;
+                    document.getElementById('expense-akomodasi').value = data.akomodasi;
+                    document.getElementById('income-notes').value = data.keterangan;
+                    document.getElementById('edit-id').value = data.id;
+                    document.getElementById('submit-btn').textContent = '💾 Update Data';
+                }
+                sessionStorage.removeItem('edit_id');
+            }
+        }
+    </script>
+</body>
+</html>

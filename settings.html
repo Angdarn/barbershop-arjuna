@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan - Pangkas Rambut Arjuna</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .navbar-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: white;
+            padding: 3px;
+            overflow: hidden;
+        }
+
+        .navbar-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .navbar h1 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 24px auto;
+            padding: 0 16px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 28px;
+            font-weight: 500;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            margin-bottom: 24px;
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            color: #1f2937;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.2s;
+            background: #f9fafb;
+            font-weight: 500;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .alert {
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #10b981;
+        }
+
+        .alert-error {
+            background: #fef2f2;
+            color: #991b1b;
+            border: 2px solid #fecaca;
+        }
+
+        @media (max-width: 768px) {
+            .navbar h1 {
+                font-size: 14px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <div class="navbar-logo">
+                <img src="logo.jpg" alt="Logo" onerror="this.style.display='none'">
+            </div>
+            <h1>⚙️ Pengaturan</h1>
+        </div>
+        <button class="btn btn-back" onclick="goBack()">← Kembali</button>
+    </div>
+
+    <div class="container">
+        <h1 class="page-title">Pengaturan Akun</h1>
+        <p class="page-subtitle">Ubah username dan password Anda</p>
+
+        <div class="card">
+            <h2>🔐 Ubah Username</h2>
+            <div id="username-alert" class="alert"></div>
+            <form id="usernameForm">
+                <div class="form-group">
+                    <label for="current-username">Username Saat Ini</label>
+                    <input type="text" id="current-username" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="new-username">Username Baru</label>
+                    <input type="text" id="new-username" required placeholder="Masukkan username baru">
+                </div>
+                <button type="submit" class="btn-primary">💾 Simpan Username</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>🔒 Ubah Password</h2>
+            <div id="password-alert" class="alert"></div>
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="current-password">Password Lama</label>
+                    <input type="password" id="current-password" required placeholder="Masukkan password lama">
+                </div>
+                <div class="form-group">
+                    <label for="new-password">Password Baru</label>
+                    <input type="password" id="new-password" required placeholder="Masukkan password baru">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Konfirmasi Password Baru</label>
+                    <input type="password" id="confirm-password" required placeholder="Ulangi password baru">
+                </div>
+                <button type="submit" class="btn-primary">💾 Simpan Password</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function checkAuth() {
+            const session = sessionStorage.getItem('arjuna_session');
+            if (!session) {
+                window.location.href = 'index.html';
+                return null;
+            }
+            return JSON.parse(session);
+        }
+
+        function goBack() {
+            const user = checkAuth();
+            if (user) {
+                window.location.href = user.role === 'owner' ? 'dashboard.html' : 'input.html';
+            }
+        }
+
+        const currentUser = checkAuth();
+        if (currentUser) {
+            document.getElementById('current-username').value = currentUser.username;
+        }
+
+        // Username form
+        document.getElementById('usernameForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newUsername = document.getElementById('new-username').value.trim();
+            const alertBox = document.getElementById('username-alert');
+            
+            if (!newUsername) {
+                alertBox.className = 'alert alert-error';
+                alertBox.textContent = '❌ Username tidak boleh kosong!';
+                alertBox.style.display = 'block';
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('arjuna_users'));
+            
+            // Check if username already exists
+            if (users.some(u => u.username === newUsername && u.id !== currentUser.id)) {
+                alertBox.className = 'alert alert-error';
+                alertBox.textContent = '❌ Username sudah digunakan!';
+                alertBox.style.display = 'block';
+                return;
+            }
+
+            // Update username
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            users[userIndex].username = newUsername;
+            localStorage.setItem('arjuna_users', JSON.stringify(users));
+
+            // Update session
+            currentUser.username = newUsername;
+            sessionStorage.setItem('arjuna_session', JSON.stringify(currentUser));
+
+            alertBox.className = 'alert alert-success';
+            alertBox.textContent = '✅ Username berhasil diubah!';
+            alertBox.style.display = 'block';
+
+            document.getElementById('current-username').value = newUsername;
+            document.getElementById('new-username').value = '';
+
+            setTimeout(() => alertBox.style.display = 'none', 3000);
+        });
+
+        // Password form
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const alertBox = document.getElementById('password-alert');
+            
+            let users = JSON.parse(localStorage.getItem('arjuna_users'));
+            const user = users.find(u => u.id === currentUser.id);
+
+            // Verify current password
+            if (user.password !== currentPassword) {
+                alertBox.className = 'alert alert-error';
+                alertBox.textContent = '❌ Password lama salah!';
+                alertBox.style.display = 'block';
+                return;
+            }
+
+            // Check password match
+            if (newPassword !== confirmPassword) {
+                alertBox.className = 'alert alert-error';
+                alertBox.textContent = '❌ Password baru tidak cocok!';
+                alertBox.style.display = 'block';
+                return;
+            }
+
+            // Check password length
+            if (newPassword.length < 6) {
+                alertBox.className = 'alert alert-error';
+                alertBox.textContent = '❌ Password minimal 6 karakter!';
+                alertBox.style.display = 'block';
+                return;
+            }
+
+            // Update password
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            users[userIndex].password = newPassword;
+            localStorage.setItem('arjuna_users', JSON.stringify(users));
+
+            alertBox.className = 'alert alert-success';
+            alertBox.textContent = '✅ Password berhasil diubah!';
+            alertBox.style.display = 'block';
+
+            this.reset();
+
+            setTimeout(() => alertBox.style.display = 'none', 3000);
+        });
+    </script>
+</body>
+</html>
